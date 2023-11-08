@@ -39,7 +39,7 @@ module.exports = {
 
             return interaction.reply({ embeds: [e], ephemeral: true })
         }
-        const Channel = interaction.guild.channels.cache.get(Config.channelLogs);
+        const Channel = interaction.guild.channels.cache.get(Config.channelLogsReport);
 
 
         interaction.reply({ embeds: [
