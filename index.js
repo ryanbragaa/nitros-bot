@@ -38,7 +38,7 @@ client.on('interactionCreate', (interaction) => {
 client.on("ready", () => {
     let react = [
         `Nitros`,
-        `🏡 Criado Por: Braga`,
+        `Criado Por: Braga`,
         `Suporte 24 horas`,
         `🌐 Versão: v${require('discord.js').version.slice(0, 6)}`
     ],
@@ -67,7 +67,7 @@ client.once('ready', () => {
 });
 client.login(config.TOKEN)
 
-client.on("interactionCreate", require('./events/startDocumentation').execute);
+client.on("interactionCreate", require('./events/canaisCompras.js').execute);
 
     process.on('uncaughtExceptionMonitor', (error, origin) => { });
 process.on('unhandledRejection', (reason, p) => {
