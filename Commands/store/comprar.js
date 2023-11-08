@@ -42,7 +42,9 @@ module.exports = {
                     }
                 )
         )
-        await interaction.reply({content: "Selecione uma das opções abaixo:", components: [row], ephemeral: true})
+        await interaction.reply({content: "Selecione uma das opções abaixo:", components: [row], ephemeral: true});
+
+        
     
     }
 }

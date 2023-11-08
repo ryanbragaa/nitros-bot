@@ -18,7 +18,7 @@
     "moment-timezone": "^0.5.41",
     "mongoose": "^7.5.2",
     "path": "^0.12.7",
-    "quick.db": "^9.0.8",
+    "quick.db": "^9.1.7",
     "sourcebin": "^5.0.0",
     "write-file-atomic": "^5.0.0"
   }

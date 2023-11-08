@@ -60,7 +60,6 @@ client.slashCommands = new Discord.Collection()
 require('./handler')(client)
 
 
-
 // Login do bot
 client.once('ready', () => {
     console.log(`Bot está online como ${client.user.tag}!`);
