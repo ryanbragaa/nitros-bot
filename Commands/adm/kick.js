@@ -13,7 +13,7 @@ module.exports = {
     },
     {
       name: "motivo",
-      description: "Porque o user está indo de arraxta?",
+      description: "Porque o user está sendo expulso?",
       type: Discord.ApplicationCommandOptionType.String,
       required: true
       }
@@ -32,14 +32,14 @@ module.exports = {
     if (interaction.user.id === user.id) {
 
       const e = new Discord.EmbedBuilder()
-      .setDescription(`não pode banir vc msm cara.`)
+      .setDescription(`não pode expulsar você mesmo.`)
 
         return interaction.reply({ embeds: [e], ephemeral: true })
     }
 
     if (client.user.id === user.id) {
       const e = new dc.EmbedBuilder()
-      .setDescription(`Não sei se te falei, mas você não pode usar em mim.`)
+      .setDescription(`Não sei se te falei, mas você não pode me expulsar.`)
 
       return interaction.reply({ embeds: [e], ephemeral: true }) 
     }
@@ -47,7 +47,7 @@ module.exports = {
     await interaction.deferReply();
 
     const e = new Discord.EmbedBuilder()
-    .setDescription(`Você esta prester a banir o ${user}, gostaria de confirmar sua ação?`)
+    .setDescription(`Você esta prester a expulsar o ${user}, gostaria de confirmar sua ação?`)
     .addFields({ name: `Motivo`, value: `${motivo}`, inline: true })
     .setFooter({ text: `Você tem 1 min para esta ação!` })
 
@@ -75,7 +75,7 @@ module.exports = {
 
             const e1 = new Discord.EmbedBuilder()
     .setTitle(`🔔 Banimento`)
-    .setDescription(`Um novo usuário foi banido.`)
+    .setDescription(`Um novo usuário foi expulso.`)
     .addFields({ name: `Autor`, value: `${interaction.member}`, inline: true },
     { name: `Membro`, value: `${user}`, inline: true },
     { name: `Motivo`, value: `**${motivo}**`, inline: false },)
@@ -85,7 +85,7 @@ module.exports = {
     interaction.guild.members.kick(membro, { reason: motivo }).catch(e => {
         
         const e2 = new Discord.EmbedBuilder()
-        .setDescription(`🔴 | Não possível realizar o banimento de ${user}.`)
+        .setDescription(`🔴 | Não possível realizar a expulsão de ${user}.`)
 
         ban.update({ embeds: [e2] }).then(()=>{ setTimeout(() => { interaction.deleteReply() }, 6000) })
         console.log(e)
@@ -96,7 +96,7 @@ module.exports = {
         if(ban.customId === 'nn') {
 
             const e = new Discord.EmbedBuilder()
-            .setDescription(`📑 *O banimento de ${user} foi cancelado por ${interaction.member}!*`)
+            .setDescription(`📑 *Expulsão de ${user} foi cancelada por ${interaction.member}!*`)
 
             ban.update({ embeds: [e], components: [] })
 
