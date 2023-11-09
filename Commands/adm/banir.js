@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = {
   name: "banir",
-  description: "Comando de banir",
+  description: "Comando para banir",
   type: Discord.ApplicationCommandType.ChatInput,
   options: [
     {
@@ -13,7 +13,7 @@ module.exports = {
     },
     {
       name: "motivo",
-      description: "Porque o user está indo de arraxta?",
+      description: "Porque o user está sendo banido ?",
       type: Discord.ApplicationCommandOptionType.String,
       required: true
       }
