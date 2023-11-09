@@ -1,6 +1,8 @@
 const { GatewayIntentBits, Partials } = require('discord.js');
 
 const Discord = require('discord.js')
+const { QuickDB } = require("quick.db")
+const db = new QuickDB();
 
 // importação dos comandos
 const { readFileSync } = require('fs');
@@ -41,7 +43,7 @@ client.on("interactionCreate", async (interaction) => {
             if (!interaction.guild.channels.cache.get(await db.get(`canal_logs_${interaction.guild.id}`))) return interaction.reply({ content: `O sistema está desativado`, ephemeral: true })
             const modal = new Discord.ModalBuilder()
             .setCustomId("modal")
-            .setTitle("Formulário")
+            .setTitle("Pedido")
 
             const pergunta1 = new Discord.TextInputBuilder()
             .setCustomId("pergunta1")
@@ -63,7 +65,7 @@ client.on("interactionCreate", async (interaction) => {
             const pergunta3 = new Discord.TextInputBuilder()
             .setCustomId("pergunta3")
             .setLabel("Já realizou alguma compra ?")
-            .setMinLength(10)
+            .setMaxLength(10)
             .setPlaceholder("Escreva sua resposta aqui.")
             .setRequired(true)
             .setStyle(Discord.TextInputStyle.Short)
@@ -90,7 +92,7 @@ client.on("interactionCreate", async (interaction) => {
             .setColor("Blue")
             .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
             .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
-            .setDescription(`O usuário ${interaction.user} enviou o formulário abaixo:`)
+            .setDescription(`O usuário ${interaction.user} enviou o pedido abaixo:`)
             .addFields(
                 {
                     name: `Qual Produto deseja adquirir?`,
@@ -109,7 +111,7 @@ client.on("interactionCreate", async (interaction) => {
                 }
             )
 
-            interaction.reply({ content: `Olá **${interaction.user.username}**, seu formulário foi enviado com sucesso!`, ephemeral: true })
+            interaction.reply({ content: `Olá **${interaction.user.username}**, seu pedido foi enviado com sucesso!`, ephemeral: true })
             await interaction.guild.channels.cache.get(await db.get(`canal_logs_${interaction.guild.id}`)).send({ embeds: [embed] })
         }
     }
