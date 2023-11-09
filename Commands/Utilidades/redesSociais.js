@@ -16,9 +16,9 @@ module.exports = {
         const botoes = new Discord.ActionRowBuilder()
         .addComponents(
             new Discord.ButtonBuilder()
-            .setLabel("YOUTUBE")
+            .setLabel("Instagram")
             .setStyle(Discord.ButtonStyle.Link)
-            .setURL("https://www.youtube.com/channel/UCfVZdHVPyT3PNY7YzM_uEVg")
+            .setURL("https://www.instagram.com")
         )
 
     await interaction.reply({embeds:[embed1], components: [botoes]})
