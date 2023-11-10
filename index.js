@@ -42,33 +42,33 @@ client.on("interactionCreate", async (interaction) => {
         if (interaction.customId === "formulario") {
             if (!interaction.guild.channels.cache.get(await db.get(`canal_logs_${interaction.guild.id}`))) return interaction.reply({ content: `O sistema está desativado`, ephemeral: true })
             const modal = new Discord.ModalBuilder()
-            .setCustomId("modal")
-            .setTitle("Pedido")
+                .setCustomId("modal")
+                .setTitle("Pedido")
 
             const pergunta1 = new Discord.TextInputBuilder()
-            .setCustomId("pergunta1")
-            .setLabel("Qual Produto deseja adquirir?")
-            .setMaxLength(30)
-            .setMinLength(5)
-            .setPlaceholder("Escreva o nome do produto aqui!.")
-            .setRequired(true)
-            .setStyle(Discord.TextInputStyle.Short)
+                .setCustomId("pergunta1")
+                .setLabel("Qual Produto deseja adquirir?")
+                .setMaxLength(30)
+                .setMinLength(5)
+                .setPlaceholder("Escreva o nome do produto aqui!.")
+                .setRequired(true)
+                .setStyle(Discord.TextInputStyle.Short)
 
             const pergunta2 = new Discord.TextInputBuilder()
-            .setCustomId("pergunta2")
-            .setLabel("Quantidade")
-            .setMaxLength(6)
-            .setPlaceholder("Escreva a quantidade aqui.")
-            .setRequired(true)
-            .setStyle(Discord.TextInputStyle.Short)
+                .setCustomId("pergunta2")
+                .setLabel("Quantidade")
+                .setMaxLength(6)
+                .setPlaceholder("Escreva a quantidade aqui.")
+                .setRequired(true)
+                .setStyle(Discord.TextInputStyle.Short)
 
             const pergunta3 = new Discord.TextInputBuilder()
-            .setCustomId("pergunta3")
-            .setLabel("Já realizou alguma compra ?")
-            .setMaxLength(10)
-            .setPlaceholder("Escreva sua resposta aqui.")
-            .setRequired(true)
-            .setStyle(Discord.TextInputStyle.Short)
+                .setCustomId("pergunta3")
+                .setLabel("Já realizou alguma compra ?")
+                .setMaxLength(10)
+                .setPlaceholder("Escreva sua resposta aqui.")
+                .setRequired(true)
+                .setStyle(Discord.TextInputStyle.Short)
 
             modal.addComponents(
                 new Discord.ActionRowBuilder().addComponents(pergunta1),
@@ -89,33 +89,315 @@ client.on("interactionCreate", async (interaction) => {
             if (!resposta3) resposta3 = "Não informado."
 
             let embed = new Discord.EmbedBuilder()
-            .setColor("Blue")
-            .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
-            .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
-            .setDescription(`O usuário ${interaction.user} enviou o pedido abaixo:`)
-            .addFields(
-                {
-                    name: `Qual Produto deseja adquirir?`,
-                    value: `*Resposta:* \`${resposta1}\``,
-                    inline: false
-                },
-                {
-                    name: `Quantidade`,
-                    value: `*Resposta:* \`${resposta2}\``,
-                    inline: false
-                },
-                {
-                    name: `Já realizou alguma compra ?`,
-                    value: `*Resposta:* \`${resposta3}\``,
-                    inline: false
-                }
-            )
+                .setColor("Blue")
+                .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
+                .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+                .setDescription(`O usuário ${interaction.user} enviou o pedido abaixo:`)
+                .addFields(
+                    {
+                        name: `Qual Produto deseja adquirir?`,
+                        value: `*Resposta:* \`${resposta1}\``,
+                        inline: false
+                    },
+                    {
+                        name: `Quantidade`,
+                        value: `*Resposta:* \`${resposta2}\``,
+                        inline: false
+                    },
+                    {
+                        name: `Já realizou alguma compra ?`,
+                        value: `*Resposta:* \`${resposta3}\``,
+                        inline: false
+                    }
+                )
 
             interaction.reply({ content: `Olá **${interaction.user.username}**, seu pedido foi enviado com sucesso!`, ephemeral: true })
             await interaction.guild.channels.cache.get(await db.get(`canal_logs_${interaction.guild.id}`)).send({ embeds: [embed] })
         }
     }
 })
+
+
+///Ticket
+
+client.on("interactionCreate", (interaction) => {
+    if (interaction.isStringSelectMenu()) {
+        if (interaction.customId === "painel_ticket") {
+            let opc = interaction.values[0];
+            if (opc === "opc1") {
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Nova opção
+
+                let nome = `📨-${interaction.user.id}`;
+                let categoria = "1172556019486961774"
+
+                if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
+
+                if (interaction.guild.channels.cache.find(c => c.name === nome)) {
+                    interaction.reply({ content: `❌ Você já possui um ticket aberto em ${interaction.guild.channels.cache.find(c => c.name === nome)}!`, ephemeral: true })
+                } else {
+                    interaction.guild.channels.create({
+                        name: nome,
+                        type: Discord.ChannelType.GuildText,
+                        parent: categoria,
+                        permissionOverwrites: [
+                            {
+                                id: interaction.guild.id,
+                                deny: [
+                                    Discord.PermissionFlagsBits.ViewChannel
+                                ]
+                            },
+                            {
+                                id: interaction.user.id,
+                                allow: [
+                                    Discord.PermissionFlagsBits.ViewChannel,
+                                    Discord.PermissionFlagsBits.SendMessages,
+                                    Discord.PermissionFlagsBits.AttachFiles,
+                                    Discord.PermissionFlagsBits.EmbedLinks,
+                                    Discord.PermissionFlagsBits.AddReactions
+                                ]
+                            }
+                        ]
+                    }).then((ch) => {
+                        interaction.reply({ content: `✔ Olá ${interaction.user}, seu ticket foi aberto em ${ch}`, ephemeral: true })
+                        let embed = new Discord.EmbedBuilder()
+                            .setColor("Blue")
+                            .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção Instagram.`);
+                        let botao = new Discord.ActionRowBuilder().addComponents(
+                            new Discord.ButtonBuilder()
+                                .setCustomId("fechar_ticket")
+                                .setEmoji("🔒")
+                                .setStyle(Discord.ButtonStyle.Danger)
+                        );
+
+                        ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                            m.pin()
+                        })
+                    })
+                }
+
+            } else if (opc === "opc2") {
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Nova opção
+
+                let nome = `📨-${interaction.user.id}`;
+                let categoria = "1172556019486961774"
+
+                if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
+
+                if (interaction.guild.channels.cache.find(c => c.name === nome)) {
+                    interaction.reply({ content: `❌ Você já possui um ticket aberto em ${interaction.guild.channels.cache.find(c => c.name === nome)}!`, ephemeral: true })
+                } else {
+                    interaction.guild.channels.create({
+                        name: nome,
+                        type: Discord.ChannelType.GuildText,
+                        parent: categoria,
+                        permissionOverwrites: [
+                            {
+                                id: interaction.guild.id,
+                                deny: [
+                                    Discord.PermissionFlagsBits.ViewChannel
+                                ]
+                            },
+                            {
+                                id: interaction.user.id,
+                                allow: [
+                                    Discord.PermissionFlagsBits.ViewChannel,
+                                    Discord.PermissionFlagsBits.SendMessages,
+                                    Discord.PermissionFlagsBits.AttachFiles,
+                                    Discord.PermissionFlagsBits.EmbedLinks,
+                                    Discord.PermissionFlagsBits.AddReactions
+                                ]
+                            }
+                        ]
+                    }).then((ch) => {
+                        interaction.reply({ content: `✔ Olá ${interaction.user}, seu ticket foi aberto em ${ch}`, ephemeral: true })
+                        let embed = new Discord.EmbedBuilder()
+                            .setColor("Blue")
+                            .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção TikTok.`);
+                        let botao = new Discord.ActionRowBuilder().addComponents(
+                            new Discord.ButtonBuilder()
+                                .setCustomId("fechar_ticket")
+                                .setEmoji("🔒")
+                                .setStyle(Discord.ButtonStyle.Danger)
+                        );
+
+                        ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                            m.pin()
+                        })
+                    })
+                }
+            } else if (opc === "opc3") {
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Nova opção
+
+                let nome = `📨-${interaction.user.id}`;
+                let categoria = "1172556019486961774"
+
+                if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
+
+                if (interaction.guild.channels.cache.find(c => c.name === nome)) {
+                    interaction.reply({ content: `❌ Você já possui um ticket aberto em ${interaction.guild.channels.cache.find(c => c.name === nome)}!`, ephemeral: true })
+                } else {
+                    interaction.guild.channels.create({
+                        name: nome,
+                        type: Discord.ChannelType.GuildText,
+                        parent: categoria,
+                        permissionOverwrites: [
+                            {
+                                id: interaction.guild.id,
+                                deny: [
+                                    Discord.PermissionFlagsBits.ViewChannel
+                                ]
+                            },
+                            {
+                                id: interaction.user.id,
+                                allow: [
+                                    Discord.PermissionFlagsBits.ViewChannel,
+                                    Discord.PermissionFlagsBits.SendMessages,
+                                    Discord.PermissionFlagsBits.AttachFiles,
+                                    Discord.PermissionFlagsBits.EmbedLinks,
+                                    Discord.PermissionFlagsBits.AddReactions
+                                ]
+                            }
+                        ]
+                    }).then((ch) => {
+                        interaction.reply({ content: `✔ Olá ${interaction.user}, seu ticket foi aberto em ${ch}`, ephemeral: true })
+                        let embed = new Discord.EmbedBuilder()
+                            .setColor("Blue")
+                            .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção Youtube.`);
+                        let botao = new Discord.ActionRowBuilder().addComponents(
+                            new Discord.ButtonBuilder()
+                                .setCustomId("fechar_ticket")
+                                .setEmoji("🔒")
+                                .setStyle(Discord.ButtonStyle.Danger)
+                        );
+
+                        ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                            m.pin()
+                        })
+                    })
+                }
+            } else if (opc === "opc4") {
+                let nome = `📨-${interaction.user.id}`;
+                let categoria = "1172556019486961774"
+
+                if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
+
+                if (interaction.guild.channels.cache.find(c => c.name === nome)) {
+                    interaction.reply({ content: `❌ Você já possui um ticket aberto em ${interaction.guild.channels.cache.find(c => c.name === nome)}!`, ephemeral: true })
+                } else {
+                    interaction.guild.channels.create({
+                        name: nome,
+                        type: Discord.ChannelType.GuildText,
+                        parent: categoria,
+                        permissionOverwrites: [
+                            {
+                                id: interaction.guild.id,
+                                deny: [
+                                    Discord.PermissionFlagsBits.ViewChannel
+                                ]
+                            },
+                            {
+                                id: interaction.user.id,
+                                allow: [
+                                    Discord.PermissionFlagsBits.ViewChannel,
+                                    Discord.PermissionFlagsBits.SendMessages,
+                                    Discord.PermissionFlagsBits.AttachFiles,
+                                    Discord.PermissionFlagsBits.EmbedLinks,
+                                    Discord.PermissionFlagsBits.AddReactions
+                                ]
+                            }
+                        ]
+                    }).then((ch) => {
+                        interaction.reply({ content: `✔ Olá ${interaction.user}, seu ticket foi aberto em ${ch}`, ephemeral: true })
+                        let embed = new Discord.EmbedBuilder()
+                            .setColor("Blue")
+                            .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção Nitro-Mensal.`);
+                        let botao = new Discord.ActionRowBuilder().addComponents(
+                            new Discord.ButtonBuilder()
+                                .setCustomId("fechar_ticket")
+                                .setEmoji("🔒")
+                                .setStyle(Discord.ButtonStyle.Danger)
+                        );
+
+                        ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                            m.pin()
+                        })
+                    })
+                }
+            } else if (opc === "opc5") {
+                let nome = `📨-${interaction.user.id}`;
+                let categoria = "1172556019486961774"
+
+                if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
+
+                if (interaction.guild.channels.cache.find(c => c.name === nome)) {
+                    interaction.reply({ content: `❌ Você já possui um ticket aberto em ${interaction.guild.channels.cache.find(c => c.name === nome)}!`, ephemeral: true })
+                } else {
+                    interaction.guild.channels.create({
+                        name: nome,
+                        type: Discord.ChannelType.GuildText,
+                        parent: categoria,
+                        permissionOverwrites: [
+                            {
+                                id: interaction.guild.id,
+                                deny: [
+                                    Discord.PermissionFlagsBits.ViewChannel
+                                ]
+                            },
+                            {
+                                id: interaction.user.id,
+                                allow: [
+                                    Discord.PermissionFlagsBits.ViewChannel,
+                                    Discord.PermissionFlagsBits.SendMessages,
+                                    Discord.PermissionFlagsBits.AttachFiles,
+                                    Discord.PermissionFlagsBits.EmbedLinks,
+                                    Discord.PermissionFlagsBits.AddReactions
+                                ]
+                            }
+                        ]
+                    }).then((ch) => {
+                        interaction.reply({ content: `✔ Olá ${interaction.user}, seu ticket foi aberto em ${ch}`, ephemeral: true })
+                        let embed = new Discord.EmbedBuilder()
+                            .setColor("Blue")
+                            .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção Nitro-Trimensal.`);
+                        let botao = new Discord.ActionRowBuilder().addComponents(
+                            new Discord.ButtonBuilder()
+                                .setCustomId("fechar_ticket")
+                                .setEmoji("🔒")
+                                .setStyle(Discord.ButtonStyle.Danger)
+                        );
+
+                        ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                            m.pin()
+                        })
+                    })
+                }
+            }
+        }
+    } else if (interaction.isButton()) {
+        if (interaction.customId === "fechar_ticket") {
+            interaction.reply(`Olá ${interaction.user}, este ticket será excluído em 5 segundos... `)
+            setTimeout(() => {
+                try {
+                    interaction.channel.delete()
+                } catch (e) {
+                    return;
+                }
+            }, 5000);
+        }
+    }
+})
+
+///
+
 
 client.on("ready", () => {
     let react = [
@@ -127,15 +409,15 @@ client.on("ready", () => {
         fera = 0;
     setInterval(() => client.user.setPresence({
         activities: [{
-            name: `${react[fera++ % react.length]}`, 
+            name: `${react[fera++ % react.length]}`,
             type: Discord.ActivityType.Streaming,
             url: 'https://www.twitch.tv/discord'
         }]
     }), 15000);
-  
+
     client.user
         .setStatus("online");
-  });
+});
 
 client.slashCommands = new Discord.Collection()
 
@@ -150,21 +432,21 @@ client.login(config.TOKEN)
 
 client.on("interactionCreate", require('./events/canaisCompras.js').execute);
 
-    process.on('uncaughtExceptionMonitor', (error, origin) => { });
+process.on('uncaughtExceptionMonitor', (error, origin) => { });
 process.on('unhandledRejection', (reason, p) => {
-  console.log('=====[ ANTI CRASH 1 ]=====')
-  console.log(reason, p)
-  console.log('==========================')
+    console.log('=====[ ANTI CRASH 1 ]=====')
+    console.log(reason, p)
+    console.log('==========================')
 })
 
 process.on("uncaughtException", (err, origin) => {
-  console.log('=====[ ANTI CRASH 2 ]=====')
-  console.log(err, origin)
-  console.log('========================')
-}) 
+    console.log('=====[ ANTI CRASH 2 ]=====')
+    console.log(err, origin)
+    console.log('========================')
+})
 
 process.on('uncaughtExceptionMonitor', (err, origin) => {
-  console.log('=====[ ANTI CRASH 3 ]=====')
-  console.log(err, origin)
-  console.log('========================')
+    console.log('=====[ ANTI CRASH 3 ]=====')
+    console.log(err, origin)
+    console.log('========================')
 }) 
