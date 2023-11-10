@@ -51,7 +51,7 @@ module.exports = {
             );
 
             interaction.reply({ content: `✔ Mensagem enviada!`, ephemeral: true })
-            interaction.channel.send({ emdeds: [embed], components: [painel] })
+            interaction.channel.send({ embeds: [embed], components: [painel] })
         }
         
     }
