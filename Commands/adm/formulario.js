@@ -4,7 +4,7 @@ const db = new QuickDB();
 
 module.exports = {
     name: "formulário",
-    description: "Abra o painel do formulário de pedidos para os membros.",
+    description: "Abra o painel do formulário para os membros.",
     type: Discord.ApplicationCommandType.ChatInput,
     options: [
         {
@@ -15,7 +15,7 @@ module.exports = {
         },
         {
             name: "canal_logs",
-            description: "Canal para enviar as logs dos pedidos recebidos.",
+            description: "Canal para enviar as logs dos formulários recebidos.",
             type: Discord.ApplicationCommandOptionType.Channel,
             required: true,
         }
@@ -48,14 +48,14 @@ module.exports = {
                     .setColor("Blue")
                     .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
                     .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
-                    .setTitle(`Pedido:`)
-                    .setDescription(`Faça seu Pedido clicando no botão abaixo!`)
+                    .setTitle(`Formulário:`)
+                    .setDescription(`Faça seu Formulário clicando no botão abaixo!`)
                     
 
                     let botao = new Discord.ActionRowBuilder().addComponents(
                         new Discord.ButtonBuilder()
                         .setCustomId("formulario")
-                        .setEmoji("🛒")
+                        .setEmoji("📝")
                         .setLabel("Clique Aqui!")
                         .setStyle(Discord.ButtonStyle.Primary)
                     )
