@@ -43,28 +43,28 @@ client.on("interactionCreate", async (interaction) => {
             if (!interaction.guild.channels.cache.get(await db.get(`canal_logs_${interaction.guild.id}`))) return interaction.reply({ content: `O sistema está desativado`, ephemeral: true })
             const modal = new Discord.ModalBuilder()
                 .setCustomId("modal")
-                .setTitle("Pedido")
+                .setTitle("Formulário")
 
             const pergunta1 = new Discord.TextInputBuilder()
                 .setCustomId("pergunta1")
-                .setLabel("Qual Produto deseja adquirir?")
+                .setLabel("Qual a sua idade ?")
                 .setMaxLength(30)
                 .setMinLength(5)
-                .setPlaceholder("Escreva o nome do produto aqui!.")
+                .setPlaceholder("Escreva sua resposta aqui.")
                 .setRequired(true)
                 .setStyle(Discord.TextInputStyle.Short)
 
             const pergunta2 = new Discord.TextInputBuilder()
                 .setCustomId("pergunta2")
-                .setLabel("Quantidade")
+                .setLabel("Qual cargo você pretende ter ?")
                 .setMaxLength(6)
-                .setPlaceholder("Escreva a quantidade aqui.")
+                .setPlaceholder("Escreva sua resposta aqui.")
                 .setRequired(true)
                 .setStyle(Discord.TextInputStyle.Short)
 
             const pergunta3 = new Discord.TextInputBuilder()
                 .setCustomId("pergunta3")
-                .setLabel("Já realizou alguma compra ?")
+                .setLabel("Por que você quer trabalhar na Nistros Store ?")
                 .setMaxLength(10)
                 .setPlaceholder("Escreva sua resposta aqui.")
                 .setRequired(true)
@@ -95,23 +95,23 @@ client.on("interactionCreate", async (interaction) => {
                 .setDescription(`O usuário ${interaction.user} enviou o pedido abaixo:`)
                 .addFields(
                     {
-                        name: `Qual Produto deseja adquirir?`,
+                        name: `Qual a sua idade ?`,
                         value: `*Resposta:* \`${resposta1}\``,
                         inline: false
                     },
                     {
-                        name: `Quantidade`,
+                        name: `Qual cargo você pretende ter ?`,
                         value: `*Resposta:* \`${resposta2}\``,
                         inline: false
                     },
                     {
-                        name: `Já realizou alguma compra ?`,
+                        name: `Por que você quer trabalhar na Nistros Store ?`,
                         value: `*Resposta:* \`${resposta3}\``,
                         inline: false
                     }
                 )
 
-            interaction.reply({ content: `Olá **${interaction.user.username}**, seu pedido foi enviado com sucesso!`, ephemeral: true })
+            interaction.reply({ content: `Olá **${interaction.user.username}**, seu formulário foi enviado com sucesso!`, ephemeral: true })
             await interaction.guild.channels.cache.get(await db.get(`canal_logs_${interaction.guild.id}`)).send({ embeds: [embed] })
         }
     }
