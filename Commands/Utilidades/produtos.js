@@ -26,7 +26,7 @@ module.exports = {
 		{ name: 'Preço: R$10,00', value: 'https://discord.com/channels/1170491792613965914/1171209130397151372' },
 		{ name: '\u200B', value: '\u200B' },
 		{ name: 'Nitro mensal', value:'Nitro de um Mês', inline: false },
-		{ name: 'Preço: R$10,00', value: 'https://discord.com/channels/1170491792613965914/1171208777706516590'},
+		{ name: 'Preço: R$10,00', value: 'https://discord.com/channels/1170491792613965914/1171208721741906050'},
 		{ name: '\u200B', value: '\u200B' },
 		{ name: 'Nitro Trimensal', value:'Nitro de Três meses', inline: false },
 		{ name: 'Preço: R$10,00', value: 'https://discord.com/channels/1170491792613965914/1171208777706516590'},
