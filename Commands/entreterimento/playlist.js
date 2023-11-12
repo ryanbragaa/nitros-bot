@@ -8,6 +8,6 @@ module.exports = {
 
     run: async (client, interaction) => {
         
-    await interaction.reply({content:"https://open.spotify.com/playlist/32YGutOLaicCbIfZpCkxXp?si=dde232c0230c4024"})
+    await interaction.reply({content:"....."})
     }
 }
