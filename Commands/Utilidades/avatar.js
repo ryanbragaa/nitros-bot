@@ -17,20 +17,20 @@ module.exports = {
         let userAvatar = interaction.options.getUser("user")
         let Avatarinfo = userAvatar.displayAvatarURL({ size: 4096, dynamic: true, format: "png" })
 
-        let ryan = new Discord.EmbedBuilder()
+        let embed = new Discord.EmbedBuilder()
             .setColor(config.color)
             .setTitle(`Avatar de ${userAvatar.username}`)
             .setImage(Avatarinfo)
             .setFooter({ text: `${config.footer}`, iconURL: `${config.avatar}` })
-        
-        let download = new ActionRowBuilder().addComponents(
+
+        let button = new ActionRowBuilder().addComponents(
             new Discord.ButtonBuilder()
                 .setLabel("Link")
                 .setStyle(Discord.ButtonStyle.Link)
                 .setURL(Avatarinfo)
                 .setEmoji("📩")
         )
-        
-        interaction.reply({ embeds: [ryan], components: [download] })
+        interaction.reply({ embeds: [embed], components: [button] })
+
     }
 }
