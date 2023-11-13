@@ -49,7 +49,6 @@ client.on("interactionCreate", async (interaction) => {
                 .setCustomId("pergunta1")
                 .setLabel("Qual a sua idade ?")
                 .setMaxLength(30)
-                .setMinLength(5)
                 .setPlaceholder("Escreva sua resposta aqui.")
                 .setRequired(true)
                 .setStyle(Discord.TextInputStyle.Short)
@@ -57,18 +56,17 @@ client.on("interactionCreate", async (interaction) => {
             const pergunta2 = new Discord.TextInputBuilder()
                 .setCustomId("pergunta2")
                 .setLabel("Qual cargo você pretende ter ?")
-                .setMaxLength(6)
+                .setMaxLength(10)
                 .setPlaceholder("Escreva sua resposta aqui.")
                 .setRequired(true)
                 .setStyle(Discord.TextInputStyle.Short)
 
             const pergunta3 = new Discord.TextInputBuilder()
                 .setCustomId("pergunta3")
-                .setLabel("Por que você quer trabalhar na Nistros Store ?")
-                .setMaxLength(10)
+                .setLabel("Por que você quer trabalhar na Nistros ?")
                 .setPlaceholder("Escreva sua resposta aqui.")
                 .setRequired(true)
-                .setStyle(Discord.TextInputStyle.Short)
+                .setStyle(Discord.TextInputStyle.Paragraph)
 
             modal.addComponents(
                 new Discord.ActionRowBuilder().addComponents(pergunta1),
@@ -92,7 +90,7 @@ client.on("interactionCreate", async (interaction) => {
                 .setColor("Blue")
                 .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
                 .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
-                .setDescription(`O usuário ${interaction.user} enviou o pedido abaixo:`)
+                .setDescription(`O usuário ${interaction.user} enviou o formulário abaixo:`)
                 .addFields(
                     {
                         name: `Qual a sua idade ?`,
@@ -105,7 +103,7 @@ client.on("interactionCreate", async (interaction) => {
                         inline: false
                     },
                     {
-                        name: `Por que você quer trabalhar na Nistros Store ?`,
+                        name: `Por que você quer trabalhar na Nistros ?`,
                         value: `*Resposta:* \`${resposta3}\``,
                         inline: false
                     }
@@ -368,6 +366,54 @@ client.on("interactionCreate", (interaction) => {
                         let embed = new Discord.EmbedBuilder()
                             .setColor("Blue")
                             .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção Nitro-Trimensal.`);
+                        let botao = new Discord.ActionRowBuilder().addComponents(
+                            new Discord.ButtonBuilder()
+                                .setCustomId("fechar_ticket")
+                                .setEmoji("🔒")
+                                .setStyle(Discord.ButtonStyle.Danger)
+                        );
+
+                        ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                            m.pin()
+                        })
+                    })
+                }
+            } else if (opc === "opc6") {
+                let nome = `📨-${interaction.user.id}`;
+                let categoria = "1172556019486961774"
+
+                if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
+
+                if (interaction.guild.channels.cache.find(c => c.name === nome)) {
+                    interaction.reply({ content: `❌ Você já possui um ticket aberto em ${interaction.guild.channels.cache.find(c => c.name === nome)}!`, ephemeral: true })
+                } else {
+                    interaction.guild.channels.create({
+                        name: nome,
+                        type: Discord.ChannelType.GuildText,
+                        parent: categoria,
+                        permissionOverwrites: [
+                            {
+                                id: interaction.guild.id,
+                                deny: [
+                                    Discord.PermissionFlagsBits.ViewChannel
+                                ]
+                            },
+                            {
+                                id: interaction.user.id,
+                                allow: [
+                                    Discord.PermissionFlagsBits.ViewChannel,
+                                    Discord.PermissionFlagsBits.SendMessages,
+                                    Discord.PermissionFlagsBits.AttachFiles,
+                                    Discord.PermissionFlagsBits.EmbedLinks,
+                                    Discord.PermissionFlagsBits.AddReactions
+                                ]
+                            }
+                        ]
+                    }).then((ch) => {
+                        interaction.reply({ content: `✔ Olá ${interaction.user}, seu ticket foi aberto em ${ch}`, ephemeral: true })
+                        let embed = new Discord.EmbedBuilder()
+                            .setColor("Blue")
+                            .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção Serviços de Streaming.`);
                         let botao = new Discord.ActionRowBuilder().addComponents(
                             new Discord.ButtonBuilder()
                                 .setCustomId("fechar_ticket")

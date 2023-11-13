@@ -39,14 +39,19 @@ module.exports = {
                     },
                     {
                         label: "Nitro-Mensal",
-                        description: "abra um ticket na opção Youtube.",
+                        description: "abra um ticket na opção Nitro-mensal.",
                         value: "opc4"
                     },
                     {
                         label: "Nitro-Trimensal",
-                        description: "abra um ticket na opção Youtube.",
+                        description: "abra um ticket na opção Nitro-Trimensal.",
                         value: "opc5"
                     },
+                    {
+                        label: "Serviços de Streaming",
+                        description: "abra um ticket na opção Serviços de Streaming.",
+                        value: "opc6"
+                    }
                 )
             );
 

@@ -14,23 +14,24 @@ module.exports = {
         }
     ],
     run: async (client, interaction) => {
-        let userAvatar = interaction.options.getUser("user")
-        let Avatarinfo = userAvatar.displayAvatarURL({ size: 4096, dynamic: true, format: "png" })
+        const userAvatar = interaction.options.getUser("user")
+        const Avatarinfo = userAvatar.displayAvatarURL({ size: 4096, dynamic: true, format: "png" })
+        
+        const embed2 = new Discord.EmbedBuilder()
+        .setAuthor({ name: `${config.nomeBot} - Avatar`})
+        .setColor(config.color)
+        .setTitle(`Avatar de ${userAvatar.username}`)
+        .setImage(Avatarinfo)
+        .setFooter({ text: `${config.footer}`, iconURL: `${config.avatar}` })
 
-        let embed = new Discord.EmbedBuilder()
-            .setColor(config.color)
-            .setTitle(`Avatar de ${userAvatar.username}`)
-            .setImage(Avatarinfo)
-            .setFooter({ text: `${config.footer}`, iconURL: `${config.avatar}` })
-
-        let button = new ActionRowBuilder().addComponents(
+        const botao = new Discord.ActionRowBuilder().addComponents(
             new Discord.ButtonBuilder()
-                .setLabel("Link")
-                .setStyle(Discord.ButtonStyle.Link)
-                .setURL(Avatarinfo)
-                .setEmoji("📩")
+            .setLabel("Link")
+            .setStyle(Discord.ButtonStyle.Link)
+            .setURL(Avatarinfo)
+            .setEmoji("📩")
         )
-        interaction.reply({ embeds: [embed], components: [button] })
-
+        
+    await interaction.reply({ embeds: [embed2], components: [botao] })
     }
 }
