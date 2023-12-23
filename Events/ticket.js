@@ -2,6 +2,10 @@ require('../index')
 const Discord = require('discord.js')
 const client = require('../index')
 
+const { QuickDB } = require("quick.db")
+const db = new QuickDB();
+
+
 
 
 client.on("interactionCreate", (interaction) => {
@@ -16,6 +20,7 @@ client.on("interactionCreate", (interaction) => {
 
                 let nome = `📨-${interaction.user.id}`;
                 let categoria = "1172556019486961774"
+                let cargo = "<@&1187492477104562186>"
 
                 if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
 
@@ -49,14 +54,20 @@ client.on("interactionCreate", (interaction) => {
                         let embed = new Discord.EmbedBuilder()
                             .setColor("Blue")
                             .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção Instagram.`);
-                        let botao = new Discord.ActionRowBuilder().addComponents(
-                            new Discord.ButtonBuilder()
-                                .setCustomId("fechar_ticket")
-                                .setEmoji("🔒")
-                                .setStyle(Discord.ButtonStyle.Danger)
-                        );
+                            
+                        let botao = new Discord.ButtonBuilder()
+                            .setCustomId("fechar_ticket")
+                            .setEmoji("🔒")
+                            .setStyle(Discord.ButtonStyle.Danger);
+                     
+                        let botao2 = new Discord.ButtonBuilder()
+                            .setCustomId("venda_realizada")
+                            .setEmoji("✅")
+                            .setStyle(Discord.ButtonStyle.Success);
+                    
+                        const row = new Discord.ActionRowBuilder().addComponents(botao, botao2);
 
-                        ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                        ch.send({ embeds: [embed], components: [row], content: `${cargo}` }).then(m => {
                             m.pin()
                         })
                     })
@@ -70,6 +81,7 @@ client.on("interactionCreate", (interaction) => {
 
                 let nome = `📨-${interaction.user.id}`;
                 let categoria = "1172556019486961774"
+                let cargo = "<@&1187492477104562186>"
 
                 if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
 
@@ -103,14 +115,20 @@ client.on("interactionCreate", (interaction) => {
                         let embed = new Discord.EmbedBuilder()
                             .setColor("Blue")
                             .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção TikTok.`);
-                        let botao = new Discord.ActionRowBuilder().addComponents(
-                            new Discord.ButtonBuilder()
-                                .setCustomId("fechar_ticket")
-                                .setEmoji("🔒")
-                                .setStyle(Discord.ButtonStyle.Danger)
-                        );
+                            
+                        let botao = new Discord.ButtonBuilder()
+                            .setCustomId("fechar_ticket")
+                            .setEmoji("🔒")
+                            .setStyle(Discord.ButtonStyle.Danger);
+                     
+                        let botao2 = new Discord.ButtonBuilder()
+                            .setCustomId("venda_realizada")
+                            .setEmoji("✅")
+                            .setStyle(Discord.ButtonStyle.Success);
+                    
+                        const row = new Discord.ActionRowBuilder().addComponents(botao, botao2);
 
-                        ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                        ch.send({ embeds: [embed], components: [row], content: `${cargo}` }).then(m => {
                             m.pin()
                         })
                     })
@@ -123,6 +141,7 @@ client.on("interactionCreate", (interaction) => {
 
                 let nome = `📨-${interaction.user.id}`;
                 let categoria = "1172556019486961774"
+                let cargo = "<@&1187492477104562186>"
 
                 if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
 
@@ -156,14 +175,20 @@ client.on("interactionCreate", (interaction) => {
                         let embed = new Discord.EmbedBuilder()
                             .setColor("Blue")
                             .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção Youtube.`);
-                        let botao = new Discord.ActionRowBuilder().addComponents(
-                            new Discord.ButtonBuilder()
-                                .setCustomId("fechar_ticket")
-                                .setEmoji("🔒")
-                                .setStyle(Discord.ButtonStyle.Danger)
-                        );
+                            
+                        let botao = new Discord.ButtonBuilder()
+                            .setCustomId("fechar_ticket")
+                            .setEmoji("🔒")
+                            .setStyle(Discord.ButtonStyle.Danger);
+                     
+                        let botao2 = new Discord.ButtonBuilder()
+                            .setCustomId("venda_realizada")
+                            .setEmoji("✅")
+                            .setStyle(Discord.ButtonStyle.Success);
+                    
+                        const row = new Discord.ActionRowBuilder().addComponents(botao, botao2);
 
-                        ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                        ch.send({ embeds: [embed], components: [row], content: `${cargo}` }).then(m => {
                             m.pin()
                         })
                     })
@@ -171,6 +196,7 @@ client.on("interactionCreate", (interaction) => {
             } else if (opc === "opc4") {
                 let nome = `📨-${interaction.user.id}`;
                 let categoria = "1172556019486961774"
+                let cargo = "<@&1187492477104562186>"
 
                 if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
 
@@ -204,14 +230,20 @@ client.on("interactionCreate", (interaction) => {
                         let embed = new Discord.EmbedBuilder()
                             .setColor("Blue")
                             .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção Nitro-Mensal.`);
-                        let botao = new Discord.ActionRowBuilder().addComponents(
-                            new Discord.ButtonBuilder()
-                                .setCustomId("fechar_ticket")
-                                .setEmoji("🔒")
-                                .setStyle(Discord.ButtonStyle.Danger)
-                        );
+                            
+                        let botao = new Discord.ButtonBuilder()
+                            .setCustomId("fechar_ticket")
+                            .setEmoji("🔒")
+                            .setStyle(Discord.ButtonStyle.Danger);
+                     
+                        let botao2 = new Discord.ButtonBuilder()
+                            .setCustomId("venda_realizada")
+                            .setEmoji("✅")
+                            .setStyle(Discord.ButtonStyle.Success);
+                    
+                        const row = new Discord.ActionRowBuilder().addComponents(botao, botao2);
 
-                        ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                        ch.send({ embeds: [embed], components: [row], content: `${cargo}` }).then(m => {
                             m.pin()
                         })
                     })
@@ -219,6 +251,7 @@ client.on("interactionCreate", (interaction) => {
             } else if (opc === "opc5") {
                 let nome = `📨-${interaction.user.id}`;
                 let categoria = "1172556019486961774"
+                let cargo = "<@&1187492477104562186>"
 
                 if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
 
@@ -252,14 +285,20 @@ client.on("interactionCreate", (interaction) => {
                         let embed = new Discord.EmbedBuilder()
                             .setColor("Blue")
                             .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção Nitro-Trimensal.`);
-                        let botao = new Discord.ActionRowBuilder().addComponents(
-                            new Discord.ButtonBuilder()
-                                .setCustomId("fechar_ticket")
-                                .setEmoji("🔒")
-                                .setStyle(Discord.ButtonStyle.Danger)
-                        );
+                            
+                        let botao = new Discord.ButtonBuilder()
+                            .setCustomId("fechar_ticket")
+                            .setEmoji("🔒")
+                            .setStyle(Discord.ButtonStyle.Danger);
+                     
+                        let botao2 = new Discord.ButtonBuilder()
+                            .setCustomId("venda_realizada")
+                            .setEmoji("✅")
+                            .setStyle(Discord.ButtonStyle.Success);
+                    
+                        const row = new Discord.ActionRowBuilder().addComponents(botao, botao2);
 
-                        ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                        ch.send({ embeds: [embed], components: [row], content: `${cargo}` }).then(m => {
                             m.pin()
                         })
                     })
@@ -267,6 +306,7 @@ client.on("interactionCreate", (interaction) => {
             } else if (opc === "opc6") {
                 let nome = `📨-${interaction.user.id}`;
                 let categoria = "1172556019486961774"
+                let cargo = "<@&1187492477104562186>"
 
                 if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
 
@@ -300,14 +340,20 @@ client.on("interactionCreate", (interaction) => {
                         let embed = new Discord.EmbedBuilder()
                             .setColor("Blue")
                             .setDescription(`Olá ${interaction.user}, você abriu o ticket pela opção Serviços de Streaming.`);
-                        let botao = new Discord.ActionRowBuilder().addComponents(
-                            new Discord.ButtonBuilder()
+
+                        let botao = new Discord.ButtonBuilder()
                                 .setCustomId("fechar_ticket")
                                 .setEmoji("🔒")
-                                .setStyle(Discord.ButtonStyle.Danger)
-                        );
+                                .setStyle(Discord.ButtonStyle.Danger);
+                         
+                        let botao2 = new Discord.ButtonBuilder()
+                                .setCustomId("venda_realizada")
+                                .setEmoji("✅")
+                                .setStyle(Discord.ButtonStyle.Success);
+                        
+                        const row = new Discord.ActionRowBuilder().addComponents(botao, botao2);
 
-                        ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                        ch.send({ embeds: [embed], components: [row], content: `${cargo}` }).then(m => {
                             m.pin()
                         })
                     })
