@@ -69,7 +69,7 @@ module.exports = {
             .setDescription(desc)
             .setURL(link)
             .setColor(cor)
-            .setThumbnail("https://cdn.discordapp.com/attachments/1170829861779152897/1175064945466015835/49cbfa6e860c2a253a1ba7d4d22f7e34.jpg?ex=6569df82&is=65576a82&hm=30af1fef6efe17bc603b92f39e61ca1f8040a90986fd3068b7b71a028503c34b&.svg")
+            .setThumbnail("https://cdn.discordapp.com/attachments/1190080248713318491/1190491575541837865/BS_STORE_LOGO_4.jpg?ex=65a1fead&is=658f89ad&hm=da33b76d34ddead113a8badd80d6c6a2279b2e422686d0e85a09fc55aa8525b0&")
             .setImage(img)
             .setTimestamp()
             
