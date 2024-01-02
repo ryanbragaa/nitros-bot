@@ -11,6 +11,7 @@ client.on("interactionCreate", (interaction) => {
 
             let nome = `📨-${interaction.user.id}`;
             let categoria = "1174334447957590166"
+            let cargo = "<@&1170491792668504100>"
 
             if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
 
@@ -51,7 +52,7 @@ client.on("interactionCreate", (interaction) => {
                             .setStyle(Discord.ButtonStyle.Danger)
                     );
 
-                    ch.send({ embeds: [embed], components: [botao] }).then(m => {
+                    ch.send({ embeds: [embed], components: [botao], content: `${cargo}` }).then(m => {
                         m.pin()
                     })
                 })
