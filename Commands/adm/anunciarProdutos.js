@@ -1,19 +1,31 @@
 const Discord = require("discord.js")
 
 module.exports = {
-    name: "anunciar",
+    name: "anunciar_produtos",
     description: "Anuncie algo em uma embed",
     type: Discord.ApplicationCommandType.ChatInput,
     options: [
         {
-            name: "título",
-            description: "Escreva algo",
+            name: "produto",
+            description: "Escreva o nome do produto",
             type: Discord.ApplicationCommandOptionType.String,
             required: true,
         },
         {
             name: "descrição",
-            description: "Escreva algo",
+            description: "Escreva o preço",
+            type: Discord.ApplicationCommandOptionType.String,
+            required: true,
+        },
+        {
+            name: "preço",
+            description: "Escreva o valor",
+            type: Discord.ApplicationCommandOptionType.String,
+            required: true,
+        },
+        {
+            name: "stock",
+            description: "Escreva a quantidade",
             type: Discord.ApplicationCommandOptionType.String,
             required: true,
         },
@@ -27,12 +39,6 @@ module.exports = {
             name: "cargo",
             description: "Mencione um cargo",
             type: Discord.ApplicationCommandOptionType.Mentionable,
-            required: false,
-        },
-        {
-            name: "link",
-            description: "Insira um link",
-            type: Discord.ApplicationCommandOptionType.String,
             required: false,
         },
         {
@@ -54,9 +60,10 @@ module.exports = {
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)) {
             interaction.reply({ content: `Você não possui permissão para utilizar este comando.`, ephemeral: true })
         } else {
-            let titulo = interaction.options.getString("título")
+            let titulo = interaction.options.getString("produto")
             let desc = interaction.options.getString("descrição")
-            let link = interaction.options.getString("link")
+            let pre = interaction.options.getString("preço")
+            let stk = interaction.options.getString("stock")
             let role = interaction.options.getRole("cargo")
             let cor = interaction.options.getString("cor")
             let img = interaction.options.getString("imagem")
@@ -68,11 +75,15 @@ module.exports = {
             let embed = new Discord.EmbedBuilder()
             .setTitle(titulo)
             .setDescription(desc)
-            .setURL(link)
+            .addFields(
+            { name: '\u200B', value: '\u200B' },
+            {name: `Preço <a:dinheiro_rdk:1191941211217477745>`, value: `${pre}`},
+            {name: `Stock <:Carrinho:1186380684722450442>`, value: `${stk}`},
+            )
+            .setFooter({ text: "discord.gg/NitrosStore" })
             .setColor(cor)
             .setThumbnail("https://cdn.discordapp.com/attachments/1190080248713318491/1190491575541837865/BS_STORE_LOGO_4.jpg?ex=65a1fead&is=658f89ad&hm=da33b76d34ddead113a8badd80d6c6a2279b2e422686d0e85a09fc55aa8525b0&")
             .setImage(img)
-            .setTimestamp()
             
 
             chat.send({ embeds: [embed], content: `${role}` }).then( () => {
