@@ -20,6 +20,12 @@ module.exports = {
             required: true,
         },
         {
+            name: "cor",
+            description: "Defina a cor da embed",
+            type: Discord.ApplicationCommandOptionType.String,
+            required: true,
+        },
+        {
             name: "tempo",
             description: "Selecione o tempo do sorteio",
             type: Discord.ApplicationCommandOptionType.String,
@@ -83,6 +89,12 @@ module.exports = {
                 },
             ],
         },
+        {
+            name: "imagem",
+            description: "Coloque uma imagem",
+            type: Discord.ApplicationCommandOptionType.String,
+            required: false,
+        }
     ],
 
     run: async (client, interaction, args) => {
@@ -94,6 +106,8 @@ module.exports = {
             let premio = interaction.options.getString("prêmio");
             let tempo = interaction.options.getString("tempo");
             let desc = interaction.options.getString("descrição");
+            let cor = interaction.options.getString("cor")
+            let img = interaction.options.getString("imagem");
 
             let duracao = ms(tempo);
 
@@ -110,16 +124,18 @@ module.exports = {
             let embed = new Discord.EmbedBuilder()
             .setAuthor({ name: `Novo sorteio!`, iconURL: interaction.guild.iconURL({ dynamic: true }) })
             .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
-            .setDescription(`> Patrocinador: ${interaction.user}.
-            > Prêmio: **${premio}.**
+            .setDescription(`Patrocinador: ${interaction.user}.
+             Prêmio: **${premio}.**
             
-            > ${desc}
+             ${desc}
             
-            > Tempo: \`${tempo}\`.
-            Clique no botão para participar.\n**Boa sorte!!!**`)
+             Tempo: \`${tempo}\`.
+
+            **Clique no botão para participar**.\n\n**Boa sorte!**`)
             .setTimestamp(Date.now() + ms(tempo))
             .setFooter({ text: "Data do sorteio:" })
-            .setColor("Random");
+            .setColor(cor)
+            .setImage(img);
 
 
             let erro = new Discord.EmbedBuilder()
