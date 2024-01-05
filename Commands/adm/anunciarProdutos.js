@@ -73,10 +73,10 @@ module.exports = {
             if (Discord.ChannelType.GuildText !== chat.type) return interaction.reply(`❌ Este canal não é um canal de texto para enviar uma mensagem.`)
 
             let embed = new Discord.EmbedBuilder()
-            .setTitle(titulo)
+            .setTitle(`${titulo}\n\n`)
             .setDescription(desc)
             .addFields(
-            { name: '\u200B', value: '\u200B' },
+            {name: '\u200B', value: '\u200B' },
             {name: `Preço <a:dinheiro_rdk:1191941211217477745>`, value: `${pre}`},
             {name: `Stock <:Carrinho:1186380684722450442>`, value: `${stk}`},
             )
