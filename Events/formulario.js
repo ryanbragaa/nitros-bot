@@ -1,6 +1,8 @@
 require('../index')
 const Discord = require('discord.js')
 const client = require('../index')
+const { QuickDB } = require("quick.db")
+const db = new QuickDB();
 
 
 client.on("interactionCreate", async (interaction) => {
