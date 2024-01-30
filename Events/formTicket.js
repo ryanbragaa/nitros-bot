@@ -11,6 +11,10 @@ client.on("interactionCreate", async (interaction) => {
     if (interaction.isButton()) {
         if (interaction.customId === "venda_realizada") {
 
+            if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)) {
+                interaction.reply({ content: `Você não possui permissão para utilizar este comando.`, ephemeral: true }) 
+            }
+
             if (!interaction.guild.channels.cache.get(`${canal_logsVendas}`)) return interaction.reply({ content: `O sistema está desativado`, ephemeral: true })
             const modal = new Discord.ModalBuilder()
                 .setCustomId("modalDois")
