@@ -39,7 +39,7 @@ module.exports = {
                     },
                     {
                         label: "Nitro-Mensal",
-                        description: "abra um ticket na opção Nitro-mensal.",
+                        description: "abra um ticket na opção Nitro-Mensal.",
                         value: "opc4"
                     },
                     {
@@ -48,10 +48,21 @@ module.exports = {
                         value: "opc5"
                     },
                     {
+                        label: "Nitro-Gift-Mensal",
+                        description: "abra um ticket na opção Nitro-Gift-Mensal.",
+                        value: "opc6"
+                    },
+                    {
                         label: "Serviços de Streaming",
                         description: "abra um ticket na opção Serviços de Streaming.",
-                        value: "opc6"
+                        value: "opc7"
+                    },
+                    {
+                        label: "Sala personalizada Free fire",
+                        description: "abra um ticket na opção Sala personalizada Free fire .",
+                        value: "opc8"
                     }
+                    
                 )
             );
 
