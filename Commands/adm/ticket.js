@@ -38,29 +38,34 @@ module.exports = {
                         value: "opc3"
                     },
                     {
+                        label: "Conta-Discord",
+                        description: "abra um ticket na opção Conta-Discord.",
+                        value: "opc4"
+                    },
+                    {
                         label: "Nitro-Mensal",
                         description: "abra um ticket na opção Nitro-Mensal.",
-                        value: "opc4"
+                        value: "opc5"
                     },
                     {
                         label: "Nitro-Trimensal",
                         description: "abra um ticket na opção Nitro-Trimensal.",
-                        value: "opc5"
+                        value: "opc6"
                     },
                     {
                         label: "Nitro-Gift-Mensal",
                         description: "abra um ticket na opção Nitro-Gift-Mensal.",
-                        value: "opc6"
+                        value: "opc7"
                     },
                     {
                         label: "Serviços de Streaming",
                         description: "abra um ticket na opção Serviços de Streaming.",
-                        value: "opc7"
+                        value: "opc8"
                     },
                     {
                         label: "Sala personalizada Free fire",
                         description: "abra um ticket na opção Sala personalizada Free fire .",
-                        value: "opc8"
+                        value: "opc9"
                     }
                     
                 )
