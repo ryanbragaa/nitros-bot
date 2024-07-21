@@ -31,7 +31,7 @@ client.on("interactionCreate", async (interaction) => {
 
             const pergunta3 = new Discord.TextInputBuilder()
                 .setCustomId("pergunta3")
-                .setLabel("Por que você quer trabalhar na Nistros ?")
+                .setLabel("Por que você quer trabalhar na Nitros ?")
                 .setPlaceholder("Escreva sua resposta aqui.")
                 .setRequired(true)
                 .setStyle(Discord.TextInputStyle.Paragraph)
@@ -71,7 +71,7 @@ client.on("interactionCreate", async (interaction) => {
                         inline: false
                     },
                     {
-                        name: `Por que você quer trabalhar na Nistros ?`,
+                        name: `Por que você quer trabalhar na Nitros ?`,
                         value: `*Resposta:* \`${resposta3}\``,
                         inline: false
                     }

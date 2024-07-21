@@ -4,6 +4,11 @@ const client = require('../index')
 const { QuickDB } = require("quick.db");
 const { userMention } = require('discord.js');
 const db = new QuickDB();
+const transcript = require('discord-html-transcripts');
+const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
+
+const channeltranscriptputo = "1254922783020814366"
+const nome = require('./ticket')
 
 
 client.on("interactionCreate", async (interaction) => {
@@ -11,8 +16,9 @@ client.on("interactionCreate", async (interaction) => {
     if (interaction.isButton()) {
         if (interaction.customId === "venda_realizada") {
 
-            if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)) {
+            if (!interaction.memberPermissions.has(Discord.PermissionFlagsBits.Administrator)) {
                 interaction.reply({ content: `Você não possui permissão para utilizar este comando.`, ephemeral: true }) 
+                return;
             }
 
             if (!interaction.guild.channels.cache.get(`${canal_logsVendas}`)) return interaction.reply({ content: `O sistema está desativado`, ephemeral: true })
@@ -62,7 +68,15 @@ client.on("interactionCreate", async (interaction) => {
             if (!resposta2) resposta2 = "Não informado."
             if (!resposta3) resposta3 = "Não informado."
 
-            let embed = new Discord.EmbedBuilder()
+            
+            
+            
+           
+
+          
+            
+
+            const embed = new Discord.EmbedBuilder()
                 .setColor("Blue")
                 .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
                 .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
@@ -85,8 +99,43 @@ client.on("interactionCreate", async (interaction) => {
                     }
                 )
 
+           
+            
+            const canaltranscript = interaction.channel
+
+            
+
+            const file =  await transcript.createTranscript(canaltranscript,
+            {
+                limit: -1,
+                returnBuffer: false,
+                fileName: `${canaltranscript.name.toLowerCase()}-transcript.html`,
+                saveImage: true,
+                poweredBy: false
+            })
+
+            
+            let cache = client.channels.cache.get(`${channeltranscriptputo}`)
+            
+
+            let msg = await cache.send({ files: [file] });
+
+            const button = new ActionRowBuilder()
+            .addComponents(
+                new Discord.ButtonBuilder()
+                .setLabel("Open")
+                .setURL(`https://mahto.id/chat-exporter?url=${msg.attachments.first()?.url}`)
+                .setStyle(Discord.ButtonStyle.Link),
+
+                new Discord.ButtonBuilder()
+                .setLabel("Download")
+                .setURL(`${msg.attachments.first()?.url}`)
+                .setStyle(Discord.ButtonStyle.Link)
+            )  
+
+
             interaction.reply({ content: `Olá **${interaction.user.username}**, sua log de venda foi enviada com sucesso!`, ephemeral: true })
-            await interaction.guild.channels.cache.get(`${canal_logsVendas}`).send({ embeds: [embed] })
+            await interaction.guild.channels.cache.get(`${canal_logsVendas}`).send({ embeds: [embed], components: [button] });
         }
     }
 })

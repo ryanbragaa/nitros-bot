@@ -1,4 +1,4 @@
-const { GatewayIntentBits, Partials } = require('discord.js');
+const { GatewayIntentBits, Partials } = require("discord.js");
 
 const Discord = require('discord.js')
 const { QuickDB } = require("quick.db")
@@ -7,7 +7,7 @@ const db = new QuickDB();
 // importação dos comandos
 const { readFileSync } = require('fs');
 
-const config = require('./config.json')
+// const config = require('./config.json')
 
 const client = new Discord.Client({
     intents: [

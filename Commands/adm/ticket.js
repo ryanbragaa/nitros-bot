@@ -38,36 +38,56 @@ module.exports = {
                         value: "opc3"
                     },
                     {
+                        label: "Ativação Nitro",
+                        description: "abra um ticket na opção Ativação Nitro.",
+                        value: "opc4"
+                    },
+                    {
                         label: "Conta-Discord",
                         description: "abra um ticket na opção Conta-Discord.",
-                        value: "opc4"
+                        value: "opc5"
                     },
                     {
                         label: "Nitro-Mensal",
                         description: "abra um ticket na opção Nitro-Mensal.",
-                        value: "opc5"
+                        value: "opc6"
                     },
                     {
                         label: "Nitro-Trimensal",
                         description: "abra um ticket na opção Nitro-Trimensal.",
-                        value: "opc6"
+                        value: "opc7"
                     },
                     {
                         label: "Nitro-Gift-Mensal",
                         description: "abra um ticket na opção Nitro-Gift-Mensal.",
-                        value: "opc7"
+                        value: "opc8"
                     },
                     {
                         label: "Serviços de Streaming",
                         description: "abra um ticket na opção Serviços de Streaming.",
-                        value: "opc8"
+                        value: "opc9"
                     },
                     {
                         label: "Sala personalizada Free fire",
                         description: "abra um ticket na opção Sala personalizada Free fire .",
-                        value: "opc9"
+                        value: "opc10"
+                    },
+                    {
+                        label: "Ativação Windows",
+                        description: "abra um ticket na opção Ativação Windows.",
+                        value: "opc11"
+                    },
+                    {
+                        label: "Cidade MTA",
+                        description: "abra um ticket na opção Cidade MTA.",
+                        value: "opc12"
+                    },
+                    {
+                        label: "Bots Discord",
+                        description: "abra um ticket na opção Bots Discord.",
+                        value: "opc13"
                     }
-                    
+
                 )
             );
 
