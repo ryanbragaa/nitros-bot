@@ -9,9 +9,9 @@ client.on("interactionCreate", (interaction) => {
         if (interaction.customId === "suporte") {
 
 
-            let nome = `📨-${interaction.user.id}`;
+            let nome = `📨-${interaction.user.username}`;
             let categoria = "1174334447957590166"
-            let cargo = "<@&1170491792668504100>"
+            let cargo = "<@&1170491792668504099>"
 
             if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
 
