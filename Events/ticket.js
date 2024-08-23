@@ -8,10 +8,13 @@ const path = require('path');
 const fs = require('fs');
 
 
+
 const ticketOptions = require('../Commands/adm/mappings/ticketOptions'); // Caminho para o arquivo de mapeamento
 
-const criarTicket = async (interaction, nome, categoria, cargo, descricaoOpcao) => {
+module.exports = criarTicket = async (interaction, nome, categoria, cargo, descricaoOpcao) => {
+
     if (!interaction.guild.channels.cache.get(categoria)) categoria = null;
+    
 
     if (interaction.guild.channels.cache.find(c => c.name === nome)) {
         return interaction.reply({ content: `❌ Você já possui um ticket aberto em ${interaction.guild.channels.cache.find(c => c.name === nome)}!`, ephemeral: true });
@@ -40,6 +43,8 @@ const criarTicket = async (interaction, nome, categoria, cargo, descricaoOpcao) 
             ]
         });
 
+        await db.set(`ticket_${ch.id}_owner`, interaction.user.username);
+
         await interaction.reply({ content: `✔ Olá ${interaction.user}, seu ticket foi aberto em ${ch}`, ephemeral: true });
 
         const configPath = path.resolve(__dirname, '../qrCodeConfig.json');
@@ -59,17 +64,25 @@ const criarTicket = async (interaction, nome, categoria, cargo, descricaoOpcao) 
 
         const botaoFechar = new Discord.ButtonBuilder()
             .setCustomId("fechar_ticket")
+            .setLabel("Fechar Ticket")
             .setEmoji("🔒")
             .setStyle(Discord.ButtonStyle.Danger);
 
         const botaoVenda = new Discord.ButtonBuilder()
             .setCustomId("venda_realizada")
+            .setLabel("Venda Realizada")
             .setEmoji("✅")
             .setStyle(Discord.ButtonStyle.Success);
 
-        const row = new Discord.ActionRowBuilder().addComponents(botaoFechar, botaoVenda);
+        const inserirCupom = new Discord.ButtonBuilder()
+            .setCustomId("Cupom")
+            .setLabel("Cupom")
+            .setEmoji("🎫")
+            .setStyle(Discord.ButtonStyle.Primary)
 
-        const message = await ch.send({ embeds: [embed], components: [row], content: `${cargo}` });
+        const row = new Discord.ActionRowBuilder().addComponents(botaoFechar, botaoVenda, inserirCupom);
+
+        const message = await ch.send({ embeds: [embed], components: [row], content: `${cargo}`}); //, content: `${cargo}` 
         await message.pin();
         await ch.send({ content: "✉ Chave Pix Email: storenitros7@gmail.com" });
     } catch (error) {
@@ -77,7 +90,7 @@ const criarTicket = async (interaction, nome, categoria, cargo, descricaoOpcao) 
     }
 };
 
-module.exports = { criarTicket };
+
 
 client.on("interactionCreate", async (interaction) => {
     if (interaction.isStringSelectMenu() && interaction.customId === "painel_ticket") {
@@ -86,15 +99,8 @@ client.on("interactionCreate", async (interaction) => {
         const nome = `📩丨${interaction.user.username}`;
         const categoria = "1172556019486961774";
         const cargo = "<@&1187492477104562186>";
+        module.exports = { nome }
         await criarTicket(interaction, nome, categoria, cargo, descricaoOpcao);
-    } else if (interaction.isButton() && interaction.customId === "fechar_ticket") {
-        interaction.reply(`Olá ${interaction.user}, este ticket será excluído em 5 segundos... `);
-        setTimeout(() => {
-            try {
-                interaction.channel.delete();
-            } catch (e) {
-                return;
-            }
-        }, 5000);
-    }
+    } 
+    
 });
