@@ -54,11 +54,20 @@ git clone <URL_DO_REPOSITORIO>
 # 2. Instale as dependências
 npm install
 
-# 3. Configure o arquivo qrCodeConfig.json
+# 3. Crie um arquivo .env e adicione o token do bot:
+echo TOKEN=seu_token_aqui > .env
 
 # 4. Inicie o bot
 node index.js
 ```
+No seu index.js, certifique-se de carregar o dotenv no início:
+```
+require("dotenv").config();
+client.login(process.env.TOKEN);
+```
+
+⚠️ Atenção: nunca coloque o token diretamente no código.
+Adicione o .env ao .gitignore para evitar que seja enviado ao GitHub.
 ---
 
 📝 Observações
