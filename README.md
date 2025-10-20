@@ -1,4 +1,4 @@
-# 🤖 NITROS Bot
+#  NITROS Bot
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.x-green?logo=node.js) 
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-blue?logo=discord) 
@@ -8,22 +8,22 @@ Bot em **Node.js** para **Discord**, focado em **administração**, **tickets de
 
 ---
 
-## ✨ Funcionalidades
-- 🔧 **Administração** — comandos básicos de gerenciamento.  
-- 📲 **QR Code** — setar e enviar QR codes personalizados.  
-- 🛍️ **Produtos** — adicionar novos produtos ao servidor.  
-- 📢 **Avisos** — criar avisos para membros.  
-- 🎫 **Tickets de Vendas**  
+##  Funcionalidades
+-  **Administração** — comandos básicos de gerenciamento.  
+-  **QR Code** — setar e enviar QR codes personalizados.  
+-  **Produtos** — adicionar novos produtos ao servidor.  
+-  **Avisos** — criar avisos para membros.  
+-  **Tickets de Vendas**  
   - Sistema baseado em **Select Menu**.  
   - Criação automática de canal.  
   - Envio automático do QR Code configurado.  
   - Inclusão de **cupons** fornecidos pelo cliente.  
-- 📊 **Logs** — canal dedicado para registro das vendas.
+-  **Logs** — canal dedicado para registro das vendas.
 - - **Transcript automático** dos tickets salvos nas logs. 
 
 ---
 
-## 🛠️ Tecnologias
+##  Tecnologias
 - [Node.js](https://nodejs.org/)  
 - [discord.js v14](https://discord.js.org/)  
 - [discord-html-transcripts](https://www.npmjs.com/package/discord-html-transcripts)  
@@ -34,7 +34,7 @@ Bot em **Node.js** para **Discord**, focado em **administração**, **tickets de
 
 ---
 
-## 📂 Estrutura
+##  Estrutura
 - Commands/ # Comandos
 - Events/ # Eventos
 - handler/ # Handler de comandos/eventos
@@ -46,7 +46,7 @@ Bot em **Node.js** para **Discord**, focado em **administração**, **tickets de
 - 
 ---
 
-## 🚀 Como Rodar
+##  Como Rodar
 ```bash
 # 1. Clone o repositório
 git clone <URL_DO_REPOSITORIO>
@@ -66,11 +66,11 @@ require("dotenv").config();
 client.login(process.env.TOKEN);
 ```
 
-⚠️ Atenção: nunca coloque o token diretamente no código.
+ Atenção: nunca coloque o token diretamente no código.
 Adicione o .env ao .gitignore para evitar que seja enviado ao GitHub.
 ---
 
-📝 Observações
+ Observações
 
 Não possui integração com gateway de pagamento.
 
@@ -78,10 +78,10 @@ Armazena dados localmente com quick.db.
 
 Pode ser deployado em local, Heroku, Docker ou VPS.
 
-👨‍💻 Autor
+ Autor
 
-Desenvolvido por Ryan Braga ⚡
+Desenvolvido por Ryan Braga 
 
-## 📄 Licença
+##  Licença
 Este projeto está licenciado sob os termos da licença **MIT**.  
 Consulte o arquivo [LICENSE](LICENSE) para mais informações.
